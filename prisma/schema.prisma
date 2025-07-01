@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Video {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  title                 String
+  description           String
+  videoUrl              String
+  thumbnailUrl          String
+  controls              Boolean  @default(true)
+  
+  transformationHeight  Int      @default(1080)   // Using VIDEO_DIMENSION.height value directly
+  transformationWidth   Int      @default(1920)   // Using VIDEO_DIMENSION.width value directly
+  transformationQuality Int?
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
