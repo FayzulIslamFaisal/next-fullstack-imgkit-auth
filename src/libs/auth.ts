@@ -11,9 +11,9 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      console.log("authOptions page credentials 1", credentials);
 
       async authorize(credentials) {
+        console.log("authOptions page credentials 1", credentials);
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
@@ -37,7 +37,8 @@ export const authOptions: NextAuthOptions = {
         if (!isCorrectPassword) {
           throw new Error("Invalid credentials");
         }
-
+        console.log("last retusn", user);
+        
         return user; 
       },
     }),
