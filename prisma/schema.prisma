@@ -25,8 +25,8 @@ model Video {
   thumbnailUrl          String
   controls              Boolean  @default(true)
   
-  transformationHeight  Int      @default(1080)   // Using VIDEO_DIMENSION.height value directly
-  transformationWidth   Int      @default(1920)   // Using VIDEO_DIMENSION.width value directly
+  transformationHeight  Int      @default(1080)  
+  transformationWidth   Int      @default(1920)   
   transformationQuality Int?
   
   createdAt             DateTime @default(now())

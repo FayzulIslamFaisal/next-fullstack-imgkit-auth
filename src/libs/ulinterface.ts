@@ -1,12 +1,5 @@
 // uiinterface.ts
-export interface UiUser {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+
 
 export const VIDEO_DIMENSION = {
   width: 1080,
@@ -25,6 +18,17 @@ export interface UiVideo {
     width: number;
     quality?: number;
   };
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+
+
+export interface UiUser {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
