@@ -11,34 +11,6 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-
-      // async authorize(credentials) {
-      //   console.log("authOptions page credentials 1", credentials);
-      //   if (!credentials?.email || !credentials?.password) {
-      //     throw new Error("Invalid credentials!");
-      //   }
-
-      //   const user = await prisma.user.findUnique({
-      //     where: { email: credentials.email },
-      //   });
-      //   console.log("authOptions page database credentials user", user);
-
-      //   if (!user || !user.password) {
-      //     throw new Error("No User Found with this email");
-      //   }
-
-      //   const isCorrectPassword = await bcrypt.compare(
-      //     credentials.password,
-      //     user.password 
-      //   );
-
-      //   if (!isCorrectPassword) {
-      //     throw new Error("Invalid credentials");
-      //   }
-      //   console.log("last retusn", user);
-        
-      //   return user; 
-      // },
       authorize: async (credentials) => {
         if (!credentials?.email || !credentials?.password) {
           return null;
