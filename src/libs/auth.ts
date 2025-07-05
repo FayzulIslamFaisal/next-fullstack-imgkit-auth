@@ -12,35 +12,57 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
 
-      async authorize(credentials) {
-        console.log("authOptions page credentials 1", credentials);
+      // async authorize(credentials) {
+      //   console.log("authOptions page credentials 1", credentials);
+      //   if (!credentials?.email || !credentials?.password) {
+      //     throw new Error("Invalid credentials!");
+      //   }
+
+      //   const user = await prisma.user.findUnique({
+      //     where: { email: credentials.email },
+      //   });
+      //   console.log("authOptions page database credentials user", user);
+
+      //   if (!user || !user.password) {
+      //     throw new Error("No User Found with this email");
+      //   }
+
+      //   const isCorrectPassword = await bcrypt.compare(
+      //     credentials.password,
+      //     user.password 
+      //   );
+
+      //   if (!isCorrectPassword) {
+      //     throw new Error("Invalid credentials");
+      //   }
+      //   console.log("last retusn", user);
+        
+      //   return user; 
+      // },
+      authorize: async (credentials) => {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Invalid credentials");
+          return null;
         }
 
         const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
+          where: { email: credentials.email },
         });
-        console.log("authOptions page database credentials user", user);
-
+        console.log("✅ Step 2 — User:", user);
         if (!user || !user.password) {
-          throw new Error("No User Found with this email");
+          return null;
         }
-
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
-          user.password 
+          user.password
         );
 
         if (!isCorrectPassword) {
-          throw new Error("Invalid credentials");
+          return null;
         }
-        console.log("last retusn", user);
-        
-        return user; 
-      },
+
+        return user;
+      }
+
     }),
   ],
   callbacks: {

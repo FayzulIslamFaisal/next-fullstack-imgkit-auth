@@ -40,12 +40,13 @@ const LoginPage = () => {
     }
 
     startTransition(async () => {
-      const results = await signIn("credentials", {
+      const results = await signIn('credentials', {
+        redirect: false,
         email,
         password,
-        redirect: false,
       });
-
+      console.log("results===>", results);
+      
       if (results?.error) {
         setError("Invalid email or password.");
       } else {
